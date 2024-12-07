@@ -1,0 +1,82 @@
+OS DEV:-
+
+We need certain documents to write an OS. We'll need to collect these documents to gain relevant knowledge. These docs are Intel® 64 and IA-32 Architectures Software Developer’s Manual (Volume
+1, 2, 3)
+ Intel® 3 Series Express Chipset Family Datasheet
+ System V Application Binary Interface
+
+LAYERS OF ABSTRACTION:
+
+All electronic devices manipulate the flow of electricity to achieve whatever they want in the real world. Computers are no exception to this. 
+Software is just indirect manipulation of electrical current at the physical level, in such a way that the underlying device produces desired effects.
+
+
+A switch periodically requires human intervention. However we need an automatic switch based on the voltage level. We got transistors to do this shit for us.
+
+At its core, transistor is just a resistor whose values vary based on input voltage.
+
+A bit has two states: 0 and 1. 
+Similar to light bulb, bits are made out the electrical stream from the power source. 
+Bit 0 is represented with 0v
+Bit 1 is from +3.V to +5V
+
+MOSFETs are nothing but fancier transistors. It takes shorter switching time between states 0 and 1, is more stables, consumes less power and easier to produce.
+
+Logic gates implement Boolean functions. All computer operations are built from the combination of logic gates, which are just combination of Boolean functions.
+
+Using NOR and NAND, we can create all other Boolean functions.
+NOR and NAND are hence called functionally complete (any possible Boolean function can be implemented using these 2 gates)
+
+
+#CMOS CIRCUITS:
+
+Underneath every logic gate, we have a circuits called a CMOS (Complementary MOSFET). CMOS consists of NMOS and PMOS. 
+
+NMOS - for low input we give high outuput; for high input we give low output
+PMOS - for low input we give low output; for high input we give high output
+
+
+Simplest CMOS is an inverter or a NOT gate.
+CMOS is just applying high or low voltage to PMOS/NMOS and then playing around with it. Nothing too deep.
+NAND/NOR is just playing around with whether it is connected in series or in parallel.
+
+a K-input gate uses k-PMOS and k-NMOS transistors.
+
+An implemented circuit with its wires and transistors is stored physically in a package called a chip. 
+
+
+#MACHINE LANGUAGE:
+
+Machine language is a collection of unique but patterns that a device can identify and perform a corresponding action on. A machine instruction is a unique bit patterns that a device can identify.
+
+The device with a computer's language is the CPU, which controls all the activities going on inside a computer. 
+eg. 10100000 means adding two numbers
+    000000101 means halting the computer.
+
+
+Why does a bit pattern cause a device to do something?
+
+Each instruction is implemented by an underlying circuit. Similar to how a function is called by its name, a bit pattern is just the name of a kutty function inside the cpu, which got executed when the cpu found the pattern.
+
+How to read truth tables:
+H --> high voltage, L --> low voltage, X --> don't care
+
+Number of input pins = length of the inputted binary string
+Number of output pins = produces binary strings of 4 bits from 8-bit input string.
+
+Therefore the language is 2^8+2^4=272 (similar to how a DFA accepts an input string)
+
+#Assembly Language:
+
+Symbolic representation of binary machine code.
+So instead of writing 0000000101 to halt the computer, we could just do hlt.
+
+There's a level of abstraction implemented here, so instead of looking up cpu manuals we could just memorize these commands to do the same shit.
+
+We also want to automate the process of device selection. (we want to simply write 
+
+
+
+
+
+
