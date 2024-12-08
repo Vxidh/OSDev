@@ -5,6 +5,10 @@ We need certain documents to write an OS. We'll need to collect these documents 
  Intel® 3 Series Express Chipset Family Datasheet
  System V Application Binary Interface
 
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+PRELIMINARY KNOWLEDGE
+
 LAYERS OF ABSTRACTION:
 
 All electronic devices manipulate the flow of electricity to achieve whatever they want in the real world. Computers are no exception to this. 
@@ -95,6 +99,152 @@ A computer does this entire thing:-
 3) Executes the instruction
 
 i.e. a fetch-decode-execute cycle
+
+
+Assembly code got repetitive, so we were able to add another level of abstraction to that. 
+
+
+Program which converts programming languages to assembly language - compiler
+
+
+The higher level a programming language is, the further away it is from hardware. Languages like python don't offer any direct functions to manipulate hardware, since it isn't necessary to get the job done.
+This comes at a cost however, since this requires software to carry an extra code for managing hardware details.
+
+I've used the term 'abstraction' a lot so far. Abstraction is just a technique to hide the complexity that is irrelevant to the problem.
+
+We can see that abstraction is implemented whenever we have repeating patterns. We can just assign one operation/device to the pattern and simplify the process.
+
+--> Logic gates abstract away the details of cmos
+--> machine language abstracts away the details of logic gates
+--> assembly abstracts away the details of machine languages
+--> programming languages abstracts away the details of assembly languages.
+
+
+Hence, abstraction reduces complexity but at the cost of carrying an extra bunch of software on it. Hence using C to write an OS is the best idea since C is just a thin wrapper of the hardware.
+
+
+#COMPUTER ARCHITECTURE
+
+FGPA --> Field-programmable gate array
+This is an IC which can be programmed to perform tasks (in Verilog or VHDL)
+
+Each 74HC00 chip can be configured as a gate, and a more sophisticated device can be built by combining multiple 74HC00. 
+In a similar fashion, each FPGA device contains thousands of chips called logic blocks which is a more complicated chip than a 74HC00.
+
+Diff b/w FPGA and other computers:
+Programs in FPGA are implemented at the logic level while program in embedded computers are implemented at the assembly level.
+Hence algorithms in FPGA is a description of the algo in logic gates, which the FPGA then follows to configure itself.
+
+
+ASIC --> Application specific integrated circuit
+Chip designed for a particular purpose rather than for general purpose. These chips are expensive as hell and any mistakes mean that they gotta be thrown away.
+
+Computer Architecture = Instruction set architecture + Computer organization +  hardware
+
+Highest level --> Instructions
+Middle level --> Computer org
+Lower level  --> hardware
+
+ISA (instruction set arch):
+Design of the environment which implements the instruction set. Essentially a runtime env which are similar to the interpreters of high level languages.
+
+Computer org:
+Functional view of the design of the computer.
+Two computers may have the same ISA but different COs 
+eg. AMD and Intel implement x86 ISA but the hardware components are different.
+
+Von-Neumann architecture is the simplest architecture which implements a fetch-decode-execute cycle. 
+Von-Neumann architecture has CPU, memory, I/O and buses.
+
+Buses are j electrical wires for sending raw bits between the above components.
+Total number of wires = bus width.
+
+How can we control a computer w/ only access to the cpu?
+CPU communicates w/ everything else through these 2 interfaces:-
+
+a) Registers:
+They are a hardware component for high-speed data access and communication w/ other hardware devices.
+They allow software to control hardware directly by writing to the register of the device, or receive info from the hardware when reading from the registers of the device.
+
+Not all registers are used for comm tho. In a cpu, most registers are used as high speed storage for temp data.
+
+b) Ports:
+Port is a specialized register in a hardware device used for communication with other devices. When data is written to the port, it causes the hardware device to perform some operation according to values written to the port. 
+Port doesn't store data unlike a register. It delegates the job to some other circuit.
+
+RAM is usually control by a device called a memory controller. In this day and age, most cpu's have this device embedded so the cpu has a dedicated memory bus connecting the processor to the ram.
+On older cpu's (pre-2009), this device was located in a chip known as MCH or Memory controller hub. In this case, cpu can't comm directly w/ the ram but rather to the mch chip which then communicates w/ the ram.
+First option == better performance because no middleman.
+
+
+##x86 architecture:
+
+Chipset is a chip w/ multiple functions. (Historically they were actually a bunch of individual chips, each responsible for a function).
+
+Each motherboard (the PCB that connects all the hardware) is defined by the chipset model which determines the env a cpu can control.
+
+This env is made up of:
+1) A slot or more for the cpu
+2) A chipset of 2 chips which are the northbridge and southbridge chips
+Northbridge: Responsible for high speed comm between cpu, main memory and graphics card
+Southbridge: Responsible for comm with I/O devices and other devices which aren't performance sensitive
+3) Slots for memory sticks
+4) Slot or more for graphics cards
+5) Generic slots for other devices
+6) Ports for I/O devices
+
+We'll need to program all of this to run an efficient OS, but the most important of them all is to program the x86 cpu.
+
+x86 exec env:
+The execution environment provides the facility to make code executable. It needs to address the following questions:
+
+1) Supported operations? data transfer, arithmetic, control, floating point
+2) Where are operands stored? registers, memory, stack, accumulators etc
+3) How many explicit operands? 0,1,2 or 3
+4) How is operand location specified? register, immediate, indirect etc
+5) What type and size of operands? byte, int, float, double, string, vector etc
+
+##x86 ASSEMBLY AND C:
+
+We still need to write in assembly because not all instructions will be covered by the compiler. There will be edge cases we'll need to take care of.
+
+
+#OBJDUMP:
+
+objdump is a program that displays info about object files. 
+
+Assume we have a program called hello.c which prints "Hello World".
+
+$ objdump -d hello will display assembled contents of executable sections. A section is a block of memory that contains program code or data.
+
+Code sections are executable by the CPU, while a data section is not executable. 
+Non-executable sections such as .data and .bss are not displayed.
+
+$ objdump -D hello displays assembly content of all sections.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+Quick jump away on how to program in WSL.
+
+We need to program in wsl to access to commands such as $objdump -d hello | less
+The less keyword isn't traditionally present in windows' terminal so we need to navigate to wsl to use this.
+
+You can either code remotely on WSL using the terminal or can also use vscode's wsl remote connection to open wsl.
+
+Run mkdir os-dev to create the folder.
+Navigate to the folder and 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
