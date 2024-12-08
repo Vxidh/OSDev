@@ -73,7 +73,46 @@ So instead of writing 0000000101 to halt the computer, we could just do hlt.
 
 There's a level of abstraction implemented here, so instead of looking up cpu manuals we could just memorize these commands to do the same shit.
 
-We also want to automate the process of device selection. (we want to simply write 
+We also want to automate the process of device selection. (we want to simply write code and the device that implements this is chosen correctly)
+
+Solving this is easy. We just give each instruction an index in binary called operation code/opcode and embed it as part of the input. 
+
+eg. nand 1100, 1100 is just 001100100 (00 encodes a nand instruction)
+
+We then add another device to select a device, based on a binary device for a particular instruction. Such a device is called a decoder.
+
+In the above example, 00 encodes a nand instruction hence the cpu knows to send this input to a nand gate.
+
+Assembler: Translate the file containing assembly code to binary string which can then be executed. 
+The first assembler can be written in binary, and then we can add a level of abstraction and write the next assembler in assembly language itself.
+
+A decoder is built out of logic gates and a storage device is something that can store 0/1 and is retrievable. It can be a magnetized device that uses magnetism to store info or it can be made out of electrical circuits that can change and remember states.
+
+
+A computer does this entire thing:-
+1) Fetches the instruction from a storage device
+2) Decodes the instruction
+3) Executes the instruction
+
+i.e. a fetch-decode-execute cycle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
