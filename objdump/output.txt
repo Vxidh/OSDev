@@ -1,0 +1,38 @@
+hello:     file format elf64-x86-64
+
+Disassembly of section .interp:
+
+0000000000000318 <.interp>:
+ 318:   2f                      (bad)
+ 319:   6c                      ins    BYTE PTR es:[rdi],dx
+ 31a:   69 62 36 34 2f 6c 64    imul   esp,DWORD PTR [rdx+0x36],0x646c2f34
+ 321:   2d 6c 69 6e 75          sub    eax,0x756e696c
+ 326:   78 2d                   js     355 <__abi_tag-0x37>
+ 328:   78 38                   js     362 <__abi_tag-0x2a>
+ 32a:   36 2d 36 34 2e 73       ss sub eax,0x732e3436
+ 330:   6f                      outs   dx,DWORD PTR ds:[rsi]
+ 331:   2e 32 00                cs xor al,BYTE PTR [rax]
+
+Disassembly of section .note.gnu.property:
+
+0000000000000338 <.note.gnu.property>:
+ 338:   04 00                   add    al,0x0
+ 33a:   00 00                   add    BYTE PTR [rax],al
+ 33c:   20 00                   and    BYTE PTR [rax],al
+ 33e:   00 00                   add    BYTE PTR [rax],al
+ 340:   05 00 00 00 47          add    eax,0x47000000
+ 345:   4e 55                   rex.WRX push rbp
+ 347:   00 02                   add    BYTE PTR [rdx],al
+ 349:   00 00                   add    BYTE PTR [rax],al
+ 34b:   c0 04 00 00             rol    BYTE PTR [rax+rax*1],0x0
+ 34f:   00 03                   add    BYTE PTR [rbx],al
+ 351:   00 00                   add    BYTE PTR [rax],al
+ 353:   00 00                   add    BYTE PTR [rax],al
+ 355:   00 00                   add    BYTE PTR [rax],al
+ 357:   00 02                   add    BYTE PTR [rdx],al
+ 359:   80 00 c0                add    BYTE PTR [rax],0xc0
+ 35c:   04 00                   add    al,0x0
+ 35e:   00 00                   add    BYTE PTR [rax],al
+ 360:   01 00                   add    DWORD PTR [rax],eax
+ 362:   00 00                   add    BYTE PTR [rax],al
+ 364:   00 00                   add    BYTE PTR [rax],al
