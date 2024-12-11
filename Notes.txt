@@ -168,7 +168,7 @@ b) Ports:
 Port is a specialized register in a hardware device used for communication with other devices. When data is written to the port, it causes the hardware device to perform some operation according to values written to the port. 
 Port doesn't store data unlike a register. It delegates the job to some other circuit.
 
-RAM is usually control by a device called a memory controller. In this day and age, most cpu's have this device embedded so the cpu has a dedicated memory bus connecting the processor to the ram.
+RAM is usually controlled by a device called a memory controller. In this day and age, most CPUs have this device embedded so the cpu has a dedicated memory bus connecting the processor to the ram.
 On older cpu's (pre-2009), this device was located in a chip known as MCH or Memory controller hub. In this case, cpu can't comm directly w/ the ram but rather to the mch chip which then communicates w/ the ram.
 First option == better performance because no middleman.
 
@@ -225,6 +225,34 @@ You can either code remotely on WSL using the terminal or can also use vscode's 
 
 To write and compile assembly, we'll need to install nasm in WSL 
 We'll need to save the file with a .asm extension, and then use nasm to compile it. (install nasm on your linux env if it's not there already)
+
+The command to compile the assembly file would be:
+$ nasm -f bin test.asm -o test
+
+-f defines the file format of the output file. In this case, the format is bin which means that the output file is just a binary file w/o any overhead meta data.
+
+Post compiling, we can examine the output by doing
+$ hd test 
+
+hd (hexdump) is a program which displays the content of a file in hex format.
 XX
 
+#Assembly instructions:
+Each assembly instruction can be broadly broken down into various subdivisions based on what each part is doing.
 
+1) Instruction Prefixes: Appears at the start of an instruction. Prefixes are optional, its just another assembly instruction to be inserted 
+so that the job is made easier for the assembler. Instruction with 2-3 byte opcodes include them by default.
+
+2) Opcode: It is a number which identifies an instruction. Each opcode is given a mnemonic name that is human readable.
+
+3) ModR/M: Specifies operands of an instruction. It can be a register, a memory location or an immediate value.
+
+eg. add eax, ecx 
+Machine code for this is 66 01 c8
+
+0x66 is not the opcode. 0x01 is the opcode. 0x66 here is the operational instruction prefix, which dictates how many bits the operand is limited to.
+
+SIB (Scale-Index-Base):
+
+Effective address = Scale*Index+Base
+Scale has values 1, 2, 4 and 8

@@ -1,2 +1,2 @@
 # OSDev
-Building an OS from scratch.
+Writing an OS for x86 architecture.
